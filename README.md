@@ -5,6 +5,7 @@ Installation
 ------------
 
 ```bash
+go get -u github.com/ilijamt/tftpl/cmd/tftpl
 go install github.com/ilijamt/tftpl/cmd/tftpl
 ```
 
