@@ -10,4 +10,5 @@ var funcMap = template.FuncMap{
 	"lower":   strings.ToLower,
 	"replace": replace,
 	"default": def,
+	"md5":     hash_md5,
 }
