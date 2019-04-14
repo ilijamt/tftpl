@@ -3,6 +3,11 @@ domain_name: example.com
 provider: google.primary-dns
 ttl: 3600
 records:
+  - name: "@"
+    type: A
+    rrdatas:
+      - 1.1.1.1
+      - 1.1.1.2
   -
     name: localhost
     type: A

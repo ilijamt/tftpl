@@ -14,6 +14,23 @@ $ tftpl build google_dns_record_set/tpl -f google_dns_record_set/data.yml
 ```
 
 ```text
+resource "google_dns_record_set" "example_com_type_a_main" {
+  provider     = "google.primary-dns"
+  managed_zone = "example-com"
+  ttl          = "3600"
+  type         = "A"
+  name         = "example.com."
+
+  rrdatas = [
+    "1.1.1.1",
+    "1.1.1.2",
+  ]
+
+  depends_on = [
+    "google_dns_managed_zone.example_com",
+  ]
+}
+
 resource "google_dns_record_set" "example_com_type_a_localhost" {
   provider     = "google.primary-dns"
   managed_zone = "example-com"

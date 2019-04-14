@@ -6,7 +6,7 @@ resource "google_dns_record_set" "{{ replace $.domain_name "_" "-" "." }}_type_{
   type         = "{{ $value.type | upper }}"
 {{- if eq $value.name "@" }}
   name         = "{{ $.domain_name }}."
-{{ else }}
+{{- else }}
   name         = "{{ $value.name }}.{{ $.domain_name }}."
 {{- end }}
 
