@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/ilijamt/tftpl/internal/funcs"
 	"strings"
 	"text/template"
 )
@@ -8,7 +9,7 @@ import (
 var funcMap = template.FuncMap{
 	"upper":   strings.ToUpper,
 	"lower":   strings.ToLower,
-	"replace": replace,
-	"default": def,
-	"md5":     hash_md5,
+	"replace": funcs.Replace,
+	"default": funcs.Default,
+	"md5":     funcs.HashMD5,
 }
