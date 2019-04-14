@@ -1,17 +1,15 @@
 ---
 domain_name: example.com
-managed_zone: example-com
-resource_name: example_com
 provider: google.primary-dns
-resource_prefix: example_com
-ttl: 14400
+ttl: 3600
 records:
-  - name: localhost
+  -
+    name: localhost
+    type: A
     ttl: 86400
     rrdatas:
       - 127.0.0.1
       - 127.0.1.1
-    type: A
   - name: www
     rrdatas:
       - "redirect-me.example.com."

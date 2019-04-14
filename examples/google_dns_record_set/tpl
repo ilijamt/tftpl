@@ -1,19 +1,23 @@
 {{- range $key, $value := .records -}}
-resource "google_dns_record_set" "{{ $.resource_prefix }}_{{ replace $value.name "_" "-" "." }}" {
+resource "google_dns_record_set" "{{ replace $.domain_name "_" "-" "." }}_type_{{ $value.type | lower }}_{{ replace (replace $value.name "_" "-" ".") "main" "@" }}" {
   provider     = "{{ $.provider }}"
-  managed_zone = "{{ $.managed_zone }}"
+  managed_zone = "{{ replace $.domain_name "-" "." "_" }}"
   ttl          = "{{ default .ttl $.ttl }}"
-  name         = "{{ $value.name }}.{{ $.domain_name }}."
   type         = "{{ $value.type | upper }}"
+{{- if eq $value.name "@" }}
+  name         = "{{ $.domain_name }}."
+{{ else }}
+  name         = "{{ $value.name }}.{{ $.domain_name }}."
+{{- end }}
 
   rrdatas = [
-    {{ range $entry := .rrdatas -}}
+    {{- range $entry := .rrdatas }}
     "{{ $entry }}",
-    {{ end -}}
+    {{- end }}
   ]
 
   depends_on = [
-    "google_dns_managed_zone.{{ $.resource_name }}",
+    "google_dns_managed_zone.{{ replace $.domain_name "_" "-" "." }}",
   ]
 }
 
